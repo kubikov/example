@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "offer-transfer.fullname" . }}
+  labels:
+    release: prometheus-operator
+{{ include "offer-transfer.labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "offer-transfer.name" . }}
+  namespaceSelector:
+    {{- with .Values.matchNames }}
+    matchNames:
+    {{- toYaml . | nindent 8 }}
+    {{- end }}
+  endpoints:
+    - port: http
+      path: /metrics-micrometer
+      interval: 30s
+      honorLabels: true

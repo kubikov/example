@@ -1,0 +1,22 @@
+POST http://localhost:8080/kafka/paging
+Content-Type: application/json
+
+{
+  "id": 1,
+  "timestamp": 1669284234,
+  "message": "Init state"
+}
+
+###
+POST http://localhost:8080/postgres/insert_all/0
+Content-Type: application/json
+
+###
+GET http://offer-transfer.vtb-dev02.cvm.phoenixit.ru/start
+Content-Type: application/json
+
+
+###
+POST http://offer-transfer.vtb-dev02.cvm.phoenixit.ru/postgres/insert_all/0
+Content-Type: application/json
+
